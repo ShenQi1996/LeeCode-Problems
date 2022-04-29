@@ -75,3 +75,36 @@ const TwoSum = (arr, target) => {
 };
 
 console.log(TwoSum([1, 2, 5, 6, 8, 9, 10], 10));
+
+//Day 4
+
+//Array -Reverse String  - Two Pointer
+
+const ReverseString = arr => {
+  let left = 0;
+  let right = arr.length - 1;
+  while (left < right) {
+    let temp = arr[left];
+    arr[left] = arr[right];
+    arr[right] = temp;
+    left = left + 1;
+    right = right - 1;
+  }
+  return arr;
+};
+
+console.log(ReverseString(["h", "e", "l", "l", "o"]));
+
+//Array - Reverse Words in a String III
+
+const ReverseWords = str => {
+  let arr = str.split(" ");
+  for (let i = 0; i < arr.length; i++) {
+    let chars = arr[i].split("");
+    chars = chars.reverse();
+    arr[i] = chars.join("");
+  }
+  return arr.join(" ");
+};
+
+console.log(ReverseWords("hello my nam is sam"));

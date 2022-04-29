@@ -20,5 +20,6 @@ const containsDuplicate = arr => {
 
 console.log(containsDuplicate([1, 2, 3, 1]));
 
+//Day 2
 
-
+//Array - Two Sum
