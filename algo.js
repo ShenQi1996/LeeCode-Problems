@@ -1,4 +1,8 @@
-// 4/26/2022 LeeCode Blink 75
+// 4/26/2022 LeeCode
+
+//Algorithm
+
+//Day1 / Day2
 
 //Array -Best Time to Buy and Sell Stock
 const maxProfit = function (prices) {
@@ -39,6 +43,8 @@ const BSearch = (target, arr) => {
 };
 
 console.log(BSearch(3, [1, 2, 3, 4, 5, 6]));
+
+//Day 3
 
 //Array -Two Pointers - Move Zeroes to the end by kee the order
 // Moving from the back to the front
