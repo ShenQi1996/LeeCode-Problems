@@ -78,7 +78,7 @@ console.log(TwoSum([1, 2, 5, 6, 8, 9, 10], 10));
 
 //Day 4
 
-//Array -Reverse String  - Two Pointer
+//Array Two Pointers -  -Reverse String  - Two Pointer
 
 const ReverseString = arr => {
   let left = 0;
@@ -95,7 +95,7 @@ const ReverseString = arr => {
 
 console.log(ReverseString(["h", "e", "l", "l", "o"]));
 
-//Array - Reverse Words in a String III
+//Array Two Pointers - - Reverse Words in a String III
 
 const ReverseWords = str => {
   let arr = str.split(" ");
@@ -108,3 +108,85 @@ const ReverseWords = str => {
 };
 
 console.log(ReverseWords("hello my nam is sam"));
+
+//Day5
+
+//Linked List Two Pointers - - Middle of the linked List
+// Linked List calls - head.next, head.val
+
+const list = {
+  head: {
+    value: 1,
+    next: {
+      value: 2,
+      next: {
+        value: 3,
+        next: {
+          value: 4,
+          next: {
+            value: 5,
+            next: null,
+          },
+        },
+      },
+    },
+  },
+};
+
+const MiddleOfLinkedList = head => {
+  let slow = head;
+  let fast = head;
+  while (fast && fast.next) {
+    slow = slow.next;
+    fast = fast.next.next;
+  }
+
+  return slow;
+};
+
+console.log(MiddleOfLinkedList(list.head));
+
+//Linked List Two Pointers - - Remove Nth Node From End of List
+
+const RemoveNthNodeFromEnd = (head, n = 2) => {
+  let slow = head;
+  let fast = head;
+  for (let i = 1; i <= n; i++) {
+    fast = fast.next;
+  }
+  if (fast === null) {
+    head = head.next;
+    return head;
+  }
+  while (fast.next) {
+    fast = fast.next;
+    slow = slow.next;
+  }
+  slow.next = slow.next.next;
+  console.log(head.next);
+  return head;
+};
+
+console.log(RemoveNthNodeFromEnd(list.head));
+
+//Day 6
+
+//String  Sliding Window - - Longest Substring Without Repeating Characters
+
+const LongestSubstring = str => {
+  let max = 1;
+  let newArr = [str[0]];
+  for (let i = 1; i < str.length; i++) {
+    if (!newArr.includes(str[i])) {
+      newArr.push(str[i]);
+    } else {
+      newArr.shift();
+      i--;
+    }
+    max = Math.max(max, newArr.length);
+  }
+
+  return max;
+};
+
+console.log(LongestSubstring("abcdecfgh"));
