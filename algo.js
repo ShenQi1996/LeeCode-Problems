@@ -190,3 +190,155 @@ const LongestSubstring = str => {
 };
 
 console.log(LongestSubstring("abcdecfgh"));
+
+// String Sliding Window  - -Permutation in String
+const Permutation = (s1, s2) => {
+  let neededChar = {};
+  for (let i = 0; i < s1.length; i++) {
+    neededChar[s1[i]] = (neededChar[s1[i]] || 0) + 1;
+  }
+
+  let left = 0;
+  let right = 0;
+  let neededLength = s1.length;
+  while (right < s2.length) {
+    if (neededChar[s2[right]] > 0) neededLength--;
+    neededChar[s2[right]] = neededChar[s2[right]] - 1;
+    right++;
+    if (neededLength === 0) return true;
+    if (right - left === s1.length) {
+      if (neededChar[s2[left]] >= 0) neededLength++;
+      neededChar[s2[left]] = neededChar[s2[left]] + 1;
+      left++;
+    }
+  }
+  return false;
+};
+
+console.log(Permutation("ab", "eidboaoo"));
+
+//Day7
+
+//Breadth-First Search / Depth-First Search - Flood Fill
+
+//DFS
+
+const FloodFillDFS = (image, sr, sc, newColor) => {
+  let currColor = image[sr][sc];
+  if (currColor === newColor) return image;
+
+  const dfs = (row, col) => {
+    if (row < 0 || row >= image.length || col < 0 || col >= image[0].length) {
+      return;
+    }
+    if (image[row][col] !== currColor) {
+      return;
+    }
+
+    image[row][col] = newColor;
+    dfs(row - 1, col); //up
+    dfs(row + 1, col); //down
+    dfs(row, col - 1); //left
+    dfs(row, col + 1); //right
+
+    return image;
+  };
+  return dfs(sr, sc);
+};
+
+console.log(
+  FloodFillDFS(
+    [
+      [1, 1, 1],
+      [1, 1, 0],
+      [1, 0, 1],
+    ],
+    1,
+    1,
+    2
+  )
+);
+
+//BFS
+
+const FloodFillBFS = (image, sr, sc, newColor) => {
+  let rows = image.length;
+  let cols = image[0].length;
+  let oldColor = image[sr][sc];
+  let queue = [];
+  queue.push([sr, sc]);
+  let visited = new Set();
+  let directions = [
+    [1, 0],
+    [0, 1],
+    [-1, 0],
+    [0, -1],
+  ];
+  while (queue.length > 0) {
+    let [a, b] = queue.shift();
+    if (visited.has(`${a}${b}`) || oldColor != image[a][b]) continue;
+    image[a][b] = newColor;
+    visited.add(`${a}${b}`);
+    for (let [x, y] of directions) {
+      let [x1, y1] = [a + x, b + y];
+      if (x1 < 0 || y1 < 0 || x1 > rows - 1 || y1 > cols - 1) continue;
+      queue.push([x1, y1]);
+    }
+  }
+  return image;
+};
+
+console.log(
+  FloodFillBFS(
+    [
+      [1, 1, 1],
+      [1, 1, 0],
+      [1, 0, 1],
+    ],
+    1,
+    1,
+    2
+  )
+);
+
+// Breadth-First Search / Depth-First Search  - - Max Area of Island
+
+//DFS
+const MaxAreaOfIsland = grid => {
+  const findMaxIsland = (i, j) => {
+    if (i < 0 || j < 0 || i >= rows || j >= cols || grid[i][j] === 0) return;
+    count++;
+    grid[i][j] = 0;
+    findMaxIsland(i + 1, j);
+    findMaxIsland(i - 1, j);
+    findMaxIsland(i, j + 1);
+    findMaxIsland(i, j - 1);
+  };
+
+  let rows = grid.length;
+  let cols = grid[0].length;
+  let count = 0;
+  let max = 0;
+
+  for (let i = 0; i < rows; i++) {
+    for (let j = 0; j < cols; j++) {
+      findMaxIsland(i, j);
+      max = Math.max(count, max);
+      count = 0;
+    }
+  }
+  return max;
+};
+
+console.log(
+  MaxAreaOfIsland([
+    [0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0],
+    [0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 1, 0, 0, 1, 1, 0, 0, 1, 0, 1, 0, 0],
+    [0, 1, 0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0],
+  ])
+);
