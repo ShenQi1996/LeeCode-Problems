@@ -219,6 +219,64 @@ console.log(Permutation("ab", "eidboaoo"));
 
 //Day7
 
+const graph = {
+  a: ["b", "c"],
+  b: ["d"],
+  c: ["e"],
+  d: ["f"],
+  e: [],
+  f: [],
+};
+
+// Breadth-First-Search
+const bfc = (graph, sp, ep) => {
+  let queue = [];
+  queue.push(sp);
+  let visited = [sp];
+  while (queue.length > 0) {
+    let currNode = queue.shift();
+    if (currNode === ep) return true;
+    for (let neighbor of graph[currNode]) {
+      if (!visited.includes(neighbor)) {
+        queue.push(neighbor);
+        visited.push(neighbor);
+      }
+    }
+  }
+  return false;
+};
+
+// console.log(bfc(graph, "a", "e"));
+
+//Depth-First-Search
+const dfs = (graph, sp, ep) => {
+  let stack = [sp];
+  while (stack.length > 0) {
+    let currNode = stack.pop();
+    if (currNode === ep) return true;
+    for (let neighbor of graph[currNode]) {
+      stack.push(neighbor);
+    }
+  }
+  return false;
+};
+
+// console.log(dfs(graph, "a", "f"));
+
+//Depth-Frist-Search Recursive
+
+const dfsRe = (graph, sp, ep) => {
+  console.log(sp);
+  if (sp === ep) return true;
+  for (let neighbor of graph[sp]) {
+    let result = dfsRe(graph, neighbor, ep);
+    return result;
+  }
+  return false;
+};
+
+// console.log(dfsRe(graph, "a", "f"));
+
 //Breadth-First Search / Depth-First Search - Flood Fill
 
 //DFS
@@ -246,18 +304,18 @@ const FloodFillDFS = (image, sr, sc, newColor) => {
   return dfs(sr, sc);
 };
 
-console.log(
-  FloodFillDFS(
-    [
-      [1, 1, 1],
-      [1, 1, 0],
-      [1, 0, 1],
-    ],
-    1,
-    1,
-    2
-  )
-);
+// console.log(
+//   FloodFillDFS(
+//     [
+//       [1, 1, 1],
+//       [1, 1, 0],
+//       [1, 0, 1],
+//     ],
+//     1,
+//     1,
+//     2
+//   )
+// );
 
 //BFS
 
@@ -288,18 +346,18 @@ const FloodFillBFS = (image, sr, sc, newColor) => {
   return image;
 };
 
-console.log(
-  FloodFillBFS(
-    [
-      [1, 1, 1],
-      [1, 1, 0],
-      [1, 0, 1],
-    ],
-    1,
-    1,
-    2
-  )
-);
+// console.log(
+//   FloodFillBFS(
+//     [
+//       [1, 1, 1],
+//       [1, 1, 0],
+//       [1, 0, 1],
+//     ],
+//     1,
+//     1,
+//     2
+//   )
+// );
 
 // Breadth-First Search / Depth-First Search  - - Max Area of Island
 
@@ -330,15 +388,15 @@ const MaxAreaOfIsland = grid => {
   return max;
 };
 
-console.log(
-  MaxAreaOfIsland([
-    [0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0],
-    [0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 1, 0, 0, 1, 1, 0, 0, 1, 0, 1, 0, 0],
-    [0, 1, 0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0],
-  ])
-);
+// console.log(
+//   MaxAreaOfIsland([
+//     [0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0],
+//     [0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0],
+//     [0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+//     [0, 1, 0, 0, 1, 1, 0, 0, 1, 0, 1, 0, 0],
+//     [0, 1, 0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 0],
+//     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0],
+//     [0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0],
+//     [0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0],
+//   ])
+// );
