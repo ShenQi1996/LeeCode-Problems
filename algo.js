@@ -400,3 +400,38 @@ const MaxAreaOfIsland = grid => {
 //     [0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0],
 //   ])
 // );
+
+//Day8
+
+// Breadth-First Search / Depth-First Search - - Merge Two Binary Trees
+
+const MergeTwoBinaryTrees = (Tree1, Tree2) => {
+  if (!Tree1 && !Tree2) return null;
+  let value = 0;
+  value = value + (Tree1 ? Tree1.val : 0);
+  value = value + (Tree2 ? Tree2.val : 0);
+
+  let newTree = new TreeNode(value);
+  newTree.left = (Tree1 ? Tree1.left : null, Tree2 ? Tree2.left : null);
+  newTree.right = (Tree1 ? Tree1.right : null, Tree2 ? Tree2.right : null);
+
+  return newTree;
+};
+
+//Depth-First Search - -Populating Next Right Pointers in Each Node
+
+const connect = root => {
+  if (root === null) return root;
+  let stack = [{ l: root.left, r: root.right }];
+  while (stack.length > 0) {
+    let { l, r } = stack.pop();
+    if (l === null || r === null) {
+      continue;
+    }
+    l.next = r;
+    stack.push({ l: l.left, r: l.right });
+    stack.push({ l: l.right, r: r.left });
+    stack.push({ l: r.left, r: r.right });
+  }
+  return root;
+};
