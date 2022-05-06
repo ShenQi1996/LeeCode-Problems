@@ -435,3 +435,109 @@ const connect = root => {
   }
   return root;
 };
+
+//Day9
+
+//Matrix - -Breadth-First Search / Depth-First Search
+
+//BFS
+const updateMatrix = matrix => {
+  let Rows = matrix.length;
+  let Cols = matrix[0].length;
+  let newArr = new Array(Rows).fill().map(() => Array(Cols).fill());
+  let queue = [];
+  const directions = [
+    [1, 0],
+    [-1, 0],
+    [0, 1],
+    [0, -1],
+  ];
+  for (let i = 0; i < Rows; i++) {
+    for (let j = 0; j < Cols; j++) {
+      if (matrix[i][j] === 0) {
+        newArr[i][j] = 0;
+        queue.push([i, j]);
+      } else {
+        newArr[i][j] = -1;
+      }
+    }
+  }
+
+  while (queue.length > 0) {
+    let [x, y] = queue.shift();
+    for (let d of directions) {
+      let newR = x + d[0];
+      let newC = y + d[1];
+      if (newR < 0 || newC < 0 || newR >= Rows || newC >= Cols) continue;
+      if (newArr[newR][newC] === 0) continue;
+      if (newArr[newR][newC] === -1) {
+        newArr[newR][newC] = newArr[x][y] + 1;
+        queue.push([newR, newC]);
+      }
+    }
+  }
+
+  return newArr;
+};
+
+//Rotting Oranges - - Breadth-First Search / Depth-First Search
+
+// Breath-First Search
+const orangesRotting = grid => {
+  let Rows = grid.length;
+  let Cols = grid[0].length;
+  let directions = [
+    [1, 0],
+    [-1, 0],
+    [0, 1],
+    [0, -1],
+  ];
+  let queue = [];
+  let time = 0;
+  let fresh = 0;
+
+  for (let i = 0; i < Rows; i++) {
+    for (let j = 0; j < Cols; j++) {
+      if (grid[i][j] === 2) {
+        queue.push([i, j]);
+      } else if (grid[i][j] === 1) {
+        fresh += 1;
+      }
+    }
+  }
+
+  if (fresh === 0) {
+    return 0;
+  }
+
+  while (queue.length > 0) {
+    let queueSize = queue.length;
+    time += 1;
+    for (let timePass = 0; timePass < queueSize; timePass++) {
+      let [x, y] = queue.shift();
+      for (let d of directions) {
+        let newR = x + d[0];
+        let newC = y + d[1];
+        if (
+          newR < 0 ||
+          newC < 0 ||
+          newR >= Rows ||
+          newC >= Cols ||
+          grid[newR][newC] != 1
+        ) {
+          continue;
+        } else {
+          grid[newR][newC] = 2;
+          fresh -= 1;
+          queue.push([newR, newC]);
+        }
+      }
+    }
+  }
+
+  if (fresh === 0) {
+    return time - 1;
+  }
+
+  return -1;
+};
