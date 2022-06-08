@@ -76,6 +76,20 @@ const TwoSum = (arr, target) => {
 
 console.log(TwoSum([1, 2, 5, 6, 8, 9, 10], 10));
 
+//Second approach
+
+const TwoSum2 = (nums, target) => {
+  let map = new Map();
+  for (let i = 0; i < nums.length; i++) {
+    let curr = target - nums[i];
+    if (!map.has(curr)) {
+      map.set(nums[i], i);
+    } else {
+      return [map.get(cuur) + 1, i + 1];
+    }
+  }
+};
+
 //Day 4
 
 //Array Two Pointers -  -Reverse String  - Two Pointer
