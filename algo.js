@@ -109,6 +109,21 @@ const ReverseString = arr => {
 
 console.log(ReverseString(["h", "e", "l", "l", "o"]));
 
+//Second approach
+
+const SecondReverseString = s => {
+  let start = 0;
+  let end = s.length - 1;
+  while (start <= end) {
+    let tem1 = s[start];
+    let tem2 = s[end];
+    s[start] = tem1;
+    s[end] = tem2;
+    start++;
+    end--;
+  }
+};
+
 //Array Two Pointers - - Reverse Words in a String III
 
 const ReverseWords = str => {
@@ -159,6 +174,26 @@ const MiddleOfLinkedList = head => {
 };
 
 console.log(MiddleOfLinkedList(list.head));
+
+//Second approach
+
+const CountMiddleOfLinkedList = head => {
+  let count = 1;
+  let List1 = head.next;
+  let List2 = head.next;
+  if (!head.next) {
+    return head;
+  }
+  while (List1) {
+    count++;
+    List1 = List1.next;
+  }
+  let mid = Math.floor(count / 2);
+  for (let i = 1; i < mid; i++) {
+    List2 = List2.next;
+  }
+  return List2;
+};
 
 //Linked List Two Pointers - - Remove Nth Node From End of List
 
