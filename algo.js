@@ -218,6 +218,27 @@ const RemoveNthNodeFromEnd = (head, n = 2) => {
 
 console.log(RemoveNthNodeFromEnd(list.head));
 
+//Second approach
+
+const RemoveNthNodeFromEndLength = (head, n) => {
+  let size = 0;
+  let list = head;
+  while (list) {
+    size += 1;
+    list = list.next;
+  }
+  if (size - n === 0 || size === 1) {
+    return head.next;
+  }
+  list = head;
+  for (let i = 1; i < size - n; i++) {
+    list = list.next;
+  }
+  list.next = list.next.next;
+
+  return head;
+};
+
 //Day 6
 
 //String  Sliding Window - - Longest Substring Without Repeating Characters
