@@ -261,6 +261,27 @@ const LongestSubstring = str => {
 
 console.log(LongestSubstring("abcdecfgh"));
 
+//Second approach
+
+const LongestSubstringSet = str => {
+  let set = new Set();
+  let currMax = 0;
+  let start = 0;
+  let end = 0;
+  while (end < str.length) {
+    if (!set.has(str.charAt(end))) {
+      set.add(str.charAt(end));
+      end += 1;
+    } else {
+      set.delete(str.charAt(start));
+      start += 1;
+    }
+    currMax = Math.max(currMax, end - start);
+  }
+
+  return currMax;
+};
+
 // String Sliding Window  - -Permutation in String
 const Permutation = (s1, s2) => {
   let neededChar = {};
