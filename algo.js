@@ -286,10 +286,10 @@ const LongestSubstringSet = str => {
 const Permutation = (s1, s2) => {
   let neededChar = {};
   for (let i = 0; i < s1.length; i++) {
-    neededChar[s1[i]] = (neededChar[s1[i]] || 0) + 1;
-  }
-
-  let left = 0;
+    neededChar[s1[i]] = (neededChar[s1[i]] || 0) + 1; /// different way to get the property of a obj
+  } // neededChar.propertyName  -- get the value base on what comes after the .
+  // neededChar["propertyName"] -- evaluate what is inside the [] then use
+  let left = 0; //                                that property to get the value
   let right = 0;
   let neededLength = s1.length;
   while (right < s2.length) {
